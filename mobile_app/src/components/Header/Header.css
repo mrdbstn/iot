@@ -1,0 +1,15 @@
+.header {
+  position: relative;
+  height: 10vh;
+  background: grey;
+}
+
+.header__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+/*# sourceMappingURL=Header.css.map */

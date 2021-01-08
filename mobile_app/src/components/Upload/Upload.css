@@ -1,0 +1,17 @@
+.upload {
+  position: relative;
+  overflow-y: scroll;
+}
+
+.upload__container {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 90vw;
+  margin: 5vh auto;
+}
+/*# sourceMappingURL=Upload.css.map */
