@@ -10,6 +10,7 @@ import Memories from './components/Memories/Memories';
 import Events from './components/Events/Events';
 import Connect from './components/Connect/Connect';
 import Upload from './components/Upload/Upload';
+import AlbumPage from './components/AlbumPage/AlbumPage';
 
 function App() {
 
@@ -18,6 +19,9 @@ function App() {
       <Router>
         <Header />
         <Switch>
+          <Route path="/a">
+            <AlbumPage />
+          </Route>
           <Route path="/events">
             <Events />
           </Route>

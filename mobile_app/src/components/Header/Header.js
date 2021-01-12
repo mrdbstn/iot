@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import './Header.css'
 
-function Header() {
+function Header({}) {
     const location = useLocation()
     const history = useHistory()
 
