@@ -1,1 +1,14 @@
-/* No CSS *//*# sourceMappingURL=albumpage.css.map */
+.albumpage {
+  padding: 20px;
+  min-height: calc(80vh - 20px - 1em - 4px);
+  overflow-y: scroll;
+}
+
+.item {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  height: 20vh;
+}
+/*# sourceMappingURL=albumpage.css.map */

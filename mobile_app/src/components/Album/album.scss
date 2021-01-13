@@ -1,5 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+@keyframes fade_up {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    } to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
 .album { 
     background-color: black;
+    box-shadow: 11px 10px 14px -6px rgba(0,0,0,0.75);
+    opacity: 0;
+    animation: fade_up 1s forwards;
     position: relative;
     display: inline-block;
     margin: 0 0 1em;
@@ -7,6 +22,8 @@
     height: 20vh;
     color: white;
     border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
   }
 
 
@@ -29,9 +46,12 @@
 
 .album__text {
     position: absolute;
-    bottom: 10%;
+    bottom: 16%;
     left: 50%;
-    margin-left: -50%;
-    text-align: center;
+    margin-left: calc(calc(100% - 40px) / -2);
     z-index: 2;
+    text-transform: capitalize;
+}
+.album__subtext {
+    bottom: 10%;
 }

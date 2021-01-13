@@ -1,5 +1,6 @@
 .memories {
   overflow-y: scroll;
+  max-height: calc(80vh - 20px - 1em - 4px);
   padding: 20px;
 }
 

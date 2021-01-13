@@ -2,7 +2,7 @@ import Amplify, { Storage } from 'aws-amplify'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import awsconfig from '../aws-exports'
-
+import '../AlbumPage/albumpage.css'
 Amplify.configure(awsconfig)
 
 
@@ -13,17 +13,14 @@ function AlbumPage() {
     let location = useLocation()
     const link = location.pathname.split('/')
     const directory = link[2]
-    console.log(directory)
     const albumname = directory.split("-")
 
     async function fetchImages() {
         let list = await Storage.list(directory)
-        console.log(list)
         let images = list.map(f => Storage.get(f.key))
 
         images = await Promise.all(images)
         setImages(images)
-        console.log(images)
 
     }
 
@@ -32,13 +29,15 @@ function AlbumPage() {
     }, [])
 
     return (
-        <div>
-           {
-                images.map((f, i) => (
-                    <img key={i} src={f} alt="oi" />
-                ))   
-            }
-            
+        <div className='albumpage'>
+            <div className="masonry">
+                {
+                    images.map((f, i) => (
+                        <img className='item' key={i} src={f} alt="oi" />
+                    ))
+                }
+            </div>
+
         </div>
     )
 }

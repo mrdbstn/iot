@@ -4,6 +4,7 @@ import awsconfig from '../aws-exports'
 import './Memories.css'
 import Album from '../Album/Album'
 import { useHistory } from 'react-router-dom'
+import { filter } from 'jszip'
 
 Amplify.configure(awsconfig)
 
@@ -32,7 +33,7 @@ function iterate(obj, array) {
     Object.keys(obj).forEach(key => {
         if (typeof obj[key] === 'object') {
             iterate(obj[key], result)
-        } else if (obj[key].toString().includes('file')){
+        } else if (obj[key].toString().includes('file')) {
             let x = obj[key].toString()
             result.push(x)
         }
@@ -67,27 +68,34 @@ function Memories() {
         let result = iterate(subfilesystem, [])
         result.map(r => {
             imgs.add(r)
-            
         })
-        let objectList = []
-
-        imgs.forEach(i => {
-            Storage.get(i)
-            .then(result => {
-                let name = i.split('/')
-                let object = {
-                    albumName: name[0],
-                    imglink: result.toString()
-                }
-                setAlbums(oldArray => [...oldArray, object])
-            })
-        }) 
+        return imgs
     }
 
+    async function makeAlbums() {
+        let imgs = await fetchAlbums();
+        let prevObject = undefined;
+        imgs.forEach(i => {
+            Storage.get(i)
+                .then(result => {
+                    let name = i.split('/')
+                    let object = {
+                        albumName: name[0],
+                        imglink: result.toString()
+                    }
+                    let name1 = prevObject?.albumName
+                    let name2 = object.albumName
+                    prevObject = object
+                    if (name1 != name2) {
+                        setAlbums(oldArray => [...oldArray, object])
+                    }
 
+                })
+        })
+    }
 
     useEffect(() => {
-        fetchAlbums()
+        makeAlbums()
     }, [])
 
 
@@ -103,7 +111,7 @@ function Memories() {
                     // ))
 
                     albums.slice(1).map((a, i) => {
-                        return <Album func={handleClick}
+                        return <Album delay={i} func={handleClick}
                             img={a.imglink} name={a.albumName} key={i} />
                     })
 
