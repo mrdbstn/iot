@@ -47,14 +47,16 @@ export const MemoriesForm = () => {
                 validate={values => {
                     const errors = {};
                     if (!values.name || !values.date || !values.pictures) {
-                        errors.name = 'Required';
-                        errors.date = 'Required';
-                        errors.pictures = 'Required';
+                        errors.name = 'Fill in a name.';
+                        errors.date = 'Fill in a valid date.';
+                        errors.pictures = 'Upload atleast one picture.';
                     }
                     return errors;
                 }}
                 onSubmit={(values, actions) => {
-
+                    setTimeout(() => {
+                        actions.setSubmitting(false);
+                    }, 400);
                     let data = new FormData()
                     values.pictures.map((picture, index) => {
                         data.append(`album-${values.name}-${values.date}/file_${index}`, picture.file)
@@ -71,7 +73,6 @@ export const MemoriesForm = () => {
                         }   
                     }
 
-                    actions.setSubmitting(false);
                 }}>
                 {({ isSubmitting, setFieldValue, values }) => (
                     <Form>
